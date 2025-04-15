@@ -1,0 +1,23 @@
+WARNING 2025-04-12 16:12:28,658 log 10668 8660 Not Found: /
+WARNING 2025-04-12 16:12:28,659 basehttp 10668 8660 "GET / HTTP/1.1" 404 2471
+WARNING 2025-04-12 16:12:28,771 log 10668 8660 Not Found: /favicon.ico
+WARNING 2025-04-12 16:12:28,771 basehttp 10668 8660 "GET /favicon.ico HTTP/1.1" 404 2522
+WARNING 2025-04-12 16:14:52,434 log 10668 2136 Forbidden: /api/v1/users/
+WARNING 2025-04-12 16:14:52,435 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 403 4935
+WARNING 2025-04-12 16:15:03,816 log 10668 2136 Forbidden: /api/v1/users/
+WARNING 2025-04-12 16:15:03,816 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 403 4935
+WARNING 2025-04-12 16:15:04,987 log 10668 2136 Forbidden: /api/v1/users/
+WARNING 2025-04-12 16:15:04,988 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 403 4935
+WARNING 2025-04-12 16:30:40,747 log 9836 8080 Method Not Allowed: /api/v1/users/register/
+WARNING 2025-04-12 16:30:40,748 basehttp 9836 8080 "GET /api/v1/users/register/ HTTP/1.1" 405 8353
+WARNING 2025-04-12 16:30:40,860 log 9836 8080 Not Found: /favicon.ico
+WARNING 2025-04-12 16:31:35,611 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:31:35,612 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8558
+WARNING 2025-04-12 16:32:34,676 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:32:34,677 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8388
+WARNING 2025-04-12 16:34:01,101 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:34:01,102 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8407
+WARNING 2025-04-12 16:34:36,878 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:34:36,879 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8413
+WARNING 2025-04-12 16:35:45,547 log 9836 5716 Method Not Allowed: /api/v1/users/login/
+WARNING 2025-04-12 16:35:45,547 basehttp 9836 5716 "GET /api/v1/users/login/ HTTP/1.1" 405 5717

@@ -1,0 +1,62 @@
+INFO 2025-04-12 16:10:31,695 autoreload 10668 8128 Watching for file changes with StatReloader
+WARNING 2025-04-12 16:12:28,658 log 10668 8660 Not Found: /
+WARNING 2025-04-12 16:12:28,659 basehttp 10668 8660 "GET / HTTP/1.1" 404 2471
+WARNING 2025-04-12 16:12:28,771 log 10668 8660 Not Found: /favicon.ico
+WARNING 2025-04-12 16:12:28,771 basehttp 10668 8660 "GET /favicon.ico HTTP/1.1" 404 2522
+WARNING 2025-04-12 16:14:52,434 log 10668 2136 Forbidden: /api/v1/users/
+WARNING 2025-04-12 16:14:52,435 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 403 4935
+INFO 2025-04-12 16:14:52,715 basehttp 10668 8180 "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+INFO 2025-04-12 16:14:52,716 basehttp 10668 2136 "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2025-04-12 16:14:52,721 basehttp 10668 8180 "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+INFO 2025-04-12 16:14:52,724 basehttp 10668 8572 "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2025-04-12 16:14:52,726 basehttp 10668 9400 "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2025-04-12 16:14:52,727 basehttp 10668 9400 "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+INFO 2025-04-12 16:14:52,729 basehttp 10668 8180 "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2025-04-12 16:14:52,730 basehttp 10668 8572 "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2025-04-12 16:14:52,730 basehttp 10668 2136 "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2025-04-12 16:14:52,733 basehttp 10668 10944 "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+INFO 2025-04-12 16:14:52,739 basehttp 10668 9780 "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+INFO 2025-04-12 16:14:52,745 basehttp 10668 2136 "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+WARNING 2025-04-12 16:15:03,816 log 10668 2136 Forbidden: /api/v1/users/
+WARNING 2025-04-12 16:15:03,816 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 403 4935
+WARNING 2025-04-12 16:15:04,987 log 10668 2136 Forbidden: /api/v1/users/
+WARNING 2025-04-12 16:15:04,988 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 403 4935
+INFO 2025-04-12 16:15:24,062 basehttp 10668 2136 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-04-12 16:15:24,127 basehttp 10668 2136 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4184
+INFO 2025-04-12 16:15:24,170 basehttp 10668 9400 "GET /static/admin/css/login.css HTTP/1.1" 200 951
+INFO 2025-04-12 16:15:24,170 basehttp 10668 10944 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-04-12 16:15:24,170 basehttp 10668 9780 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-04-12 16:15:24,170 basehttp 10668 2136 "GET /static/admin/css/base.css HTTP/1.1" 200 22154
+INFO 2025-04-12 16:15:24,173 basehttp 10668 10944 "GET /static/admin/css/responsive.css HTTP/1.1" 200 16632
+INFO 2025-04-12 16:15:24,181 basehttp 10668 8180 "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-04-12 16:15:24,190 basehttp 10668 8572 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-04-12 16:15:31,790 basehttp 10668 2136 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4357
+INFO 2025-04-12 16:16:40,759 basehttp 10668 2136 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-04-12 16:16:40,843 basehttp 10668 2136 "GET /admin/ HTTP/1.1" 200 6654
+INFO 2025-04-12 16:16:40,935 basehttp 10668 2136 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-04-12 16:16:40,954 basehttp 10668 2136 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-04-12 16:16:40,954 basehttp 10668 10944 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-04-12 16:17:01,019 basehttp 10668 2136 "GET /api/v1/users/ HTTP/1.1" 200 5490
+INFO 2025-04-12 16:27:11,467 autoreload 10668 8128 D:\diploma\backend\my_cloud\my_cloud\settings.py changed, reloading.
+INFO 2025-04-12 16:27:12,046 autoreload 1596 7704 Watching for file changes with StatReloader
+INFO 2025-04-12 16:27:13,646 autoreload 1596 7704 D:\diploma\backend\my_cloud\my_cloud\settings.py changed, reloading.
+INFO 2025-04-12 16:27:31,500 autoreload 1592 10908 Watching for file changes with StatReloader
+INFO 2025-04-12 16:29:09,218 autoreload 1592 10908 D:\diploma\backend\my_cloud\my_cloud\settings.py changed, reloading.
+INFO 2025-04-12 16:29:09,774 autoreload 10412 7952 Watching for file changes with StatReloader
+INFO 2025-04-12 16:29:13,488 autoreload 10412 7952 D:\diploma\backend\my_cloud\my_cloud\settings.py changed, reloading.
+INFO 2025-04-12 16:29:14,013 autoreload 9836 7940 Watching for file changes with StatReloader
+WARNING 2025-04-12 16:30:40,747 log 9836 8080 Method Not Allowed: /api/v1/users/register/
+WARNING 2025-04-12 16:30:40,748 basehttp 9836 8080 "GET /api/v1/users/register/ HTTP/1.1" 405 8353
+WARNING 2025-04-12 16:30:40,860 log 9836 8080 Not Found: /favicon.ico
+INFO 2025-04-12 16:30:40,861 basehttp 9836 8080 - Broken pipe from ('127.0.0.1', 52350)
+WARNING 2025-04-12 16:31:35,611 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:31:35,612 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8558
+WARNING 2025-04-12 16:32:34,676 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:32:34,677 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8388
+WARNING 2025-04-12 16:34:01,101 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:34:01,102 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8407
+WARNING 2025-04-12 16:34:36,878 log 9836 5716 Bad Request: /api/v1/users/register/
+WARNING 2025-04-12 16:34:36,879 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 400 8413
+INFO 2025-04-12 16:35:20,078 basehttp 9836 5716 "POST /api/v1/users/register/ HTTP/1.1" 201 8458
+WARNING 2025-04-12 16:35:45,547 log 9836 5716 Method Not Allowed: /api/v1/users/login/
+WARNING 2025-04-12 16:35:45,547 basehttp 9836 5716 "GET /api/v1/users/login/ HTTP/1.1" 405 5717
