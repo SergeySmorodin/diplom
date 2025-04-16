@@ -12,6 +12,11 @@ def validate_username(value):
             _("Логин должен начинаться с буквы, содержать только латинские " \
             "буквы и цифры, длина 4-20 символов")
         )
+    # Проверка уникальности имени пользователя
+    if User.objects.filter(username=value).exists():
+        raise ValidationError(
+            _("Пользователь с таким логином уже существует.")
+        )
 
 def validate_email(value, instance=None):
     if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', value):
