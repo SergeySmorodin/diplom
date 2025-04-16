@@ -54,27 +54,13 @@ def test_folder(test_user):
 
 @pytest.fixture
 def test_file(test_user, test_folder):
-    """Фикстура для создания тестового файла"""
     file_content = b"Test file content"
     uploaded_file = SimpleUploadedFile("test.txt", file_content)
-
-    # Создаем файл в MEDIA_ROOT
-    media_root = settings.MEDIA_ROOT
-    os.makedirs(media_root, exist_ok=True)
-    file_path = os.path.join(media_root, "test.txt")
-    with open(file_path, "wb") as f:
-        f.write(file_content)
-
-    # Создаем объект File
-    file_obj = File.objects.create(
+    file = File.objects.create(
         original_name="test.txt",
-        file_path=file_path,
-        size=len(file_content),
+        file_path=uploaded_file,
         owner=test_user,
         folder=test_folder
     )
-    yield file_obj
-
-    if os.path.exists(file_path):
-        os.remove(file_path)
-    file_obj.delete()
+    yield file
+    file.delete()

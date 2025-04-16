@@ -43,3 +43,21 @@ class UserLoginSerializer(serializers.Serializer):
         style={'input_type': 'password'},
         write_only=True
     )
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        password = attrs.get('password')
+        request = self.context.get('request')
+        user = authenticate(request=request, username=username, password=password)
+        if not user:
+            raise serializers.ValidationError(
+                _("Неверные имя пользователя или пароль"),
+                code='authorization'
+            )
+        if not user.is_active:
+            raise serializers.ValidationError(
+                _("Аккаунт деактивирован"),
+                code='inactive'
+            )
+        attrs['user'] = user
+        return attrs

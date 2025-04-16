@@ -7,6 +7,8 @@ from django.urls import reverse
 from rest_framework import status
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
+from rest_framework.exceptions import ErrorDetail
+import urllib.parse
 from cloud_app.models import File, Folder
 
 
@@ -54,11 +56,14 @@ def test_file_upload_invalid_extension(api_client, test_user):
     uploaded_file = SimpleUploadedFile("test.invalid", b"content")
     response = api_client.post(url, {'file': uploaded_file}, format='multipart')
 
-    print(response.data)
-
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert 'file' in response.data
-    assert 'Недопустимое расширение файла' in response.data['file'][0]
+
+    # Проверяем, что ошибка связана с полем 'file'
+    error_detail = response.data['file'][0]
+    assert isinstance(error_detail, ErrorDetail)
+    assert str(error_detail) == 'Недопустимое расширение файла: .invalid'
+    assert error_detail.code == 'invalid'
 
 
 def test_file_list(api_client, test_user, test_folder, test_file):
@@ -76,7 +81,8 @@ def test_file_download(api_client, test_user, test_file):
     url = reverse('cloud:file-download', kwargs={'pk': test_file.id})
     response = api_client.get(url)
     assert response.status_code == status.HTTP_200_OK
-    assert response['Content-Disposition'] == f'attachment; filename="{test_file.original_name}"'
+    expected_filename = urllib.parse.quote(test_file.original_name)
+    assert response['Content-Disposition'] == f'attachment; filename="{expected_filename}"'
 
 
 def test_file_download_unauthorized(api_client, test_file):
@@ -144,7 +150,7 @@ def test_file_download_by_link(api_client, test_file):
     assert response.status_code == status.HTTP_200_OK
     assert response['Content-Disposition'] == f'attachment; filename="{test_file.original_name}"'
 
-
+@pytest.mark.django_db
 def test_file_download_by_link_invalid(api_client):
     """Тест скачивания файла по неверной публичной ссылке"""
     invalid_uuid = uuid.uuid4()

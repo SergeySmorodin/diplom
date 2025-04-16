@@ -103,7 +103,8 @@ class FileDeleteSerializer(serializers.Serializer):
 class FileRenameSerializer(serializers.ModelSerializer):
     new_name = serializers.CharField(
         max_length=255,
-        help_text=_("Новое имя файла")
+        help_text=_("Новое имя файла"),
+        write_only=True
     )
     
     class Meta:

@@ -1,6 +1,16 @@
-from rest_framework import viewsets, generics, status
-from rest_framework.response import Response
+import logging
+import os
+
+from django.conf import settings
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, status
+from rest_framework import viewsets
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+from . import services
 from .models import File, Folder
 from .serializers import (
     FileListSerializer,
@@ -11,12 +21,6 @@ from .serializers import (
     FolderSerializer,
     FolderWithFilesSerializer
 )
-from django.shortcuts import get_object_or_404
-from django.http import FileResponse
-import os
-import logging
-from . import services
-
 
 logger = logging.getLogger(__name__)
 

@@ -10,7 +10,7 @@ from users.utils.validators import (
 
 User = get_user_model()
 
-
+@pytest.mark.django_db
 class TestValidateUsername:
     @pytest.mark.parametrize(
         "username,valid",
@@ -33,7 +33,7 @@ class TestValidateUsername:
             with pytest.raises(ValidationError):
                 validate_username(username)
 
-
+@pytest.mark.django_db
 class TestValidateEmail:
     @pytest.mark.parametrize(
         "email,valid",
@@ -46,7 +46,7 @@ class TestValidateEmail:
             ("@example.com", False),
         ],
     )
-    @pytest.mark.django_db
+
     def test_email_format_validation(self, email, valid):
         if valid:
             validate_email(email)
