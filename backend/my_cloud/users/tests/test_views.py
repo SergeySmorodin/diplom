@@ -158,7 +158,6 @@ class TestLoginView:
 @pytest.mark.django_db
 class TestLogoutView:
     def test_successful_logout(self, api_client, regular_user):
-
         login_url = reverse('users:user-login')
         login_data = {
             'username': 'regular',

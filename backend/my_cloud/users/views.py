@@ -96,28 +96,37 @@ class LoginView(APIView):
                 {"detail": "Validation failed", "errors": serializer.errors},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
-        username = request.data.get('username')
-        password = request.data.get('password')
-            
+
+        username = serializer.validated_data.get('username')
+        password = serializer.validated_data.get('password')
+
+        # Аутентифицируем пользователя
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            logger.info(f"User {username} logged in. Session: {request.session.session_key}")
-            return Response({
-                'detail': 'Login successful',
-                'user': UserSerializer(user).data,
-                'sessionid': request.session.session_key
-            })
-        
-        logger.warning(f"Failed login attempt for username: {username}")
-        return Response(
-            {'detail': 'Invalid credentials'},
-            status=status.HTTP_401_UNAUTHORIZED
-        )
+            if user.is_active:
+                login(request, user)
+                logger.info(f"User {username} logged in. Session: {request.session.session_key}")
+                return Response({
+                    'detail': 'Login successful',
+                    'user': UserSerializer(user).data,
+                    'sessionid': request.session.session_key
+                })
+            else:
+                logger.warning(f"Login attempt for deactivated user: {username}")
+                return Response(
+                    {'detail': 'Аккаунт деактивирован'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+        else:
+            logger.warning(f"Failed login attempt for username: {username}")
+            return Response(
+                {'detail': 'Неверные имя пользователя или пароль'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
 
 class LogoutView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request):
         if not request.user.is_authenticated:
@@ -126,7 +135,7 @@ class LogoutView(APIView):
                 {"detail": "Not authenticated"},
                 status=status.HTTP_401_UNAUTHORIZED
             )
-            
+
         username = request.user.username
         try:
             logout(request)

@@ -1,3 +1,5 @@
+import os
+
 from django.core.exceptions import ValidationError
 import logging
 
@@ -9,5 +11,4 @@ def validate_file_extension(uploaded_file):
     ext = os.path.splitext(uploaded_file.name)[1].lower()
     if ext not in allowed_extensions:
         raise ValidationError(f"Недопустимое расширение файла: {ext}")
-    
 
