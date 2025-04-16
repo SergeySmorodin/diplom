@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from config.general_config import DATABASES, SECRET_KEY, DEBUG, ALLOWED_HOSTS
+# from config.general_config import DATABASES, SECRET_KEY, DEBUG, ALLOWED_HOSTS
 from config.my_cloud_config import BASE_DIR, MEDIA_URL, MEDIA_ROOT
 from config.logging_config import LOGGING
 
@@ -22,6 +22,8 @@ INSTALLED_APPS = [
 
     'cloud_app.apps.CloudAppConfig',
     'users.apps.UsersConfig',
+
+
 ]
 
 MIDDLEWARE = [
@@ -36,6 +38,23 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'my_cloud.urls'
+
+SECRET_KEY="BeM49o14QThKrKaqjCM3SenfCX07h2gSnf3fEVJjEZ5J0Z2LVbUzE7W-J4Xay5NQKtQ"
+
+DEBUG=True
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cloud_app',
+        'USER': 'postgres',
+        'PASSWORD': '12qwaszx',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 TEMPLATES = [
     {
@@ -83,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -97,7 +116,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Куда собирать файлы при `collectstatic`
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Куда собирать файлы при `collectstatic`
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -108,12 +127,18 @@ AUTHENTICATION_BACKENDS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',  # Добавлено для админ-панели
+        # 'rest_framework.authentication.TokenAuthentication',  # Для API
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # Более мягкие права
     ],
     'EXCEPTION_HANDLER': 'my_cloud.utils.custom_exception_handler',
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',  # Для удобства разработки
+    ],
 }
 
 
@@ -130,3 +155,10 @@ CSRF_COOKIE_HTTPONLY = False  # React должен читать CSRF-токен
 CSRF_COOKIE_SECURE = False  # Только HTTPS (в production)
 CSRF_COOKIE_SAMESITE = 'Lax'  # Защита от CSRF
 CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'  # React будет отправлять токен в заголовке
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+
+if DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+

@@ -190,6 +190,11 @@ class FileDownloadByLinkSerializer(serializers.Serializer):
         except File.DoesNotExist:
             raise ValidationError(_("Файл с такой публичной ссылкой не найден"))
 
+    def to_internal_value(self, data):
+        # Преобразуем входные данные в объект File
+        validated_data = super().to_internal_value(data)
+        return validated_data['public_link']
+
 class FolderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Folder

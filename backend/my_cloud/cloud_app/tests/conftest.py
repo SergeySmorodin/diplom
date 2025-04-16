@@ -1,8 +1,14 @@
+import os
+
 import pytest
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APIClient
 
 from cloud_app.models import File, Folder
+
+User = get_user_model()
 
 
 @pytest.fixture
@@ -11,33 +17,64 @@ def api_client():
 
 
 @pytest.fixture
-def authenticated_user(db, django_user_model):
+def test_user(db):
     """Фикстура для создания аутентифицированного пользователя"""
-    user = django_user_model.objects.create_user(
+    user = User.objects.create_user(
         username='testuser',
         email='testuser@example.ru',
         password='Testpassword123!',
         is_active=True,
-        # is_admin=True,
-        # is_staff=True,
     )
-    return user
+    yield user
+    user.delete()
 
 
 @pytest.fixture
-def folder(authenticated_user):
-    """Фикстура для создания папки"""
-    return Folder.objects.create(name="Test Folder", owner=authenticated_user)
+def other_user(db):
+    """Фикстура для создания другого пользователя"""
+    user = User.objects.create_user(
+        username='otheruser',
+        email='other@example.com',
+        password='Otherpass123!'
+    )
+    yield user
+    user.delete()
 
 
 @pytest.fixture
-def file(authenticated_user, folder):
-    """Фикстура для создания файла"""
+def test_folder(test_user):
+    """Фикстура для создания тестовой папки"""
+    folder = Folder.objects.create(
+        name='Test Folder',
+        owner=test_user
+    )
+    yield folder
+    folder.delete()
+
+
+@pytest.fixture
+def test_file(test_user, test_folder):
+    """Фикстура для создания тестового файла"""
     file_content = b"Test file content"
     uploaded_file = SimpleUploadedFile("test.txt", file_content)
-    return File.objects.create(
+
+    # Создаем файл в MEDIA_ROOT
+    media_root = settings.MEDIA_ROOT
+    os.makedirs(media_root, exist_ok=True)
+    file_path = os.path.join(media_root, "test.txt")
+    with open(file_path, "wb") as f:
+        f.write(file_content)
+
+    # Создаем объект File
+    file_obj = File.objects.create(
         original_name="test.txt",
-        file_path=uploaded_file,
-        owner=authenticated_user,
-        folder=folder
+        file_path=file_path,
+        size=len(file_content),
+        owner=test_user,
+        folder=test_folder
     )
+    yield file_obj
+
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    file_obj.delete()

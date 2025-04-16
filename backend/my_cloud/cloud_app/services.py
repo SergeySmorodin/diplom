@@ -16,7 +16,7 @@ def save_file_to_storage(uploaded_file, user_id=None):
     storage_path = f"user_{user_id}/{unique_name}" if user_id else unique_name
     full_path = os.path.join(settings.MEDIA_ROOT, storage_path)
     
-    os.makedirs(os.dirname(full_path), exist_ok=True)
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
     with open(full_path, 'wb+') as destination:
         for chunk in uploaded_file.chunks():
             destination.write(chunk)
